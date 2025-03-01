@@ -1,5 +1,5 @@
 # Fast Whisper
- An API designed to run OpenAI Whisper locally on your device. The /upload/ endpoint expects a file and it returns the transcription of the audio.
+ An API designed to run OpenAI Whisper locally on your device using FastAPI. The /upload/ endpoint expects a file and it returns the transcription of the audio.
 
 ## Requirements
 I've made this API with Python 3.12. To run it you first need to install some requirements.
