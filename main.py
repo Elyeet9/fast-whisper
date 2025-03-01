@@ -1,9 +1,23 @@
 from fastapi import FastAPI, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 import tempfile
 import whisper
 import os
 
 app = FastAPI()
+
+# Configure CORS
+origins = [
+    "http://localhost:3000",    # Change with your frontend URL
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 model = whisper.load_model("turbo").to("cuda")
 
 # Endpoint that recieves audio file and transcribes it with openai whisper
@@ -24,4 +38,5 @@ async def upload_audio(file: UploadFile):
     # Clean up the temporary file
     os.remove(temp_file_path)
 
+    print(result['text'])
     return {"transcription": result['text']}
